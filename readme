@@ -1,0 +1,8 @@
+/game_project
+│── main.py  # 主程式
+│── scenes.py  # 儲存角色 & 場景
+│── background1.jpg  # 背景圖
+│── background2.jpg
+│── character1.png  # 角色圖片
+│── character2.png
+│── msjh.ttc  # 字體檔案（確保存在）
