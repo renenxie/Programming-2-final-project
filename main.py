@@ -6,6 +6,9 @@ pygame.init()
 
 # 設定畫面大小
 WIDTH, HEIGHT = 800, 600
+
+WIDTH, HEIGHT = 800, 600
+WIDTH, HEIGHT = 800, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("北斗紅磚市場的無錯循環")
 

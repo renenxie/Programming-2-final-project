@@ -1,5 +1,6 @@
 import pygame
 import time
+import json
 
 
 
@@ -74,22 +75,19 @@ def scene_1():
     screen_center_x = 800 // 2  # 螢幕寬度的一半
     character_width = 300  # 角色圖片寬度（假設角色圖片大小是 150x150）
     character_height = 300
-    characters = [
-        Character("character1.png", (screen_center_x - character_width // 2, 150), [
-            "北斗紅磚市場，一座充滿歷史氣息的建築\n"
-            "市場裡仍然有老攤販擺攤、柑仔店販售傳統零食！\n" 
-            "理髮廳的師傅依舊熟練地為客人修剪頭髮",
-            "但奇怪的是，每天市場內的場景都是一模一樣的——攤販賣著同樣的春捲，\n"
-            "柑仔店的老闆娘總是找不到某個硬幣\n"
-            "理髮師每天在相同的時間擦拭鏡子，低聲說著：「今天又是這一天……」"
-        ]),
-        Character("shopkeeper.png", (screen_center_x - character_width // 2, 150), [
-            "我們這裡的紅磚市場可是百年歷史的地標！",
-            "但你有沒有發現……每天都好像重複著同樣的事情？",
-            "我每天都在找一枚硬幣，可是它永遠找不到……"
-        ])
-    ]
-    
+
+    with open("scene_1.json", "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    characters = []
+    for i, char_data in enumerate(data["characters"]):
+        image_path = char_data["name"]
+        dialogues = char_data["dialogues"]
+        # 你可以根據角色數量自行設定位置偏移
+        pos_x = screen_center_x - character_width // 2 + i * 50  # 為每個角色略微偏移位置
+        pos = (pos_x, 150)
+        characters.append(Character(image_path, pos, dialogues))
+
     background = pygame.image.load("background1.jpg")
     background = pygame.transform.scale(background, (800, 600))
     
@@ -102,18 +100,17 @@ def scene_2():
     character_width = 300  # 角色圖片寬度（假設角色圖片大小是 150x150）
     character_height = 300
 
-    characters = [
-        Character("character2.png", (screen_center_x - character_width // 2, 150), [
-            "新新理髮廳是一間家傳三代的老理髮店，位於老街的一角", 
-            "外頭的招牌早已斑駁褪色，依稀能看出過去燙髮、剃鬍的廣告字樣，\n象徵著那個年代的時髦與興盛", 
-            "然而，因為後代無人接手，這家店的故事也即將畫下句點，成為被時光遺忘的角落"
-        ]),
-        Character("barber.png", (screen_center_x - character_width // 2, 150), [
-            "我已經在這間店工作了 40 年，見證了無數客人從年輕變成老爺爺", 
-            "每次拿起剃刀，彷彿還能聽見當年的熱鬧聲", 
-            "可是，現在的年輕人已經不再來這裡了……"
-        ])
-    ]
+    with open("scene_2.json", "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    characters = []
+    for i, char_data in enumerate(data["characters"]):
+        image_path = char_data["name"]
+        dialogues = char_data["dialogues"]
+        pos_x = screen_center_x - character_width // 2 + i * 50
+        pos = (pos_x, 150)
+        characters.append(Character(image_path, pos, dialogues))
+
     
     background = pygame.image.load("background2.jpg")
     background = pygame.transform.scale(background, (800, 600))
