@@ -2,7 +2,6 @@
 
 🎮 一款沉浸式互動敘事解謎遊戲，結合彰化北斗紅磚市場的歷史與懷舊氛圍
 
-
 ## 🔹 遊戲核心概念
 
 🔹 **結合北斗紅磚市場的歷史**  
@@ -14,13 +13,11 @@
 🔹 **復古與現代交錯**  
 遊戲設計將老建築、歷史文物與現代解謎元素結合，讓玩家身臨其境地感受「歲月靜置」的懷舊氛圍。
 
-
 ## 🎭 遊戲資料
 
 - 📍 **地點**：彰化北斗紅磚市場、柑仔店、新新理髮廳  
 - 🕰 **主題**：時光靜止的最後一天、靈魂困於紅磚市場的真相  
 - 🎮 **類型**：沉浸式解謎探索 / 互動敘事遊戲  
-
 
 ## 📖 遊戲背景故事
 
@@ -35,7 +32,6 @@
 
 隨著探索深入，你逐漸發現自己其實不是陌生人，而是……
 
-
 ## 🕵️ 遊戲機制
 
 ### 🔎 探索與對話  
@@ -49,11 +45,9 @@
 ### ⏳ 循環與變化  
 每次嘗試不同行為都會改變市場的一部分，慢慢接近真相。
 
-
 ## 🔥 最後真相
 
 你原來是當年的一位市場攤販／學徒，死於那場大火。靈魂困於市場最後一天，反覆尋找應該做但沒做的事……
-
 
 ## 📜 多重結局設計
 
@@ -66,8 +60,6 @@
 3️⃣ **市場的大火再度發生**  
 試圖干預卻錯誤選擇 → 大火重演 → 循環歸零
 
----
-
 ## 🎯 遊戲特色
 
 - 🕰 **歷史 × 靈異**：時間靜止、靈魂遺忘，營造詭異氛圍  
@@ -75,19 +67,17 @@
 - 🕵️ **非線性解謎**：多路徑結局，選擇影響結果  
 - 🔥 **懸疑 × 懷舊**：探索記憶中的遺憾與謎團
 
-
-## 💡 總結
-
-一場關於「遺忘」、「重複」與「救贖」的故事  
-在北斗紅磚市場的最後一天  
-你，是否能找到真正的出口？
-
 ## 👥 團隊分工
 
 - **王笙倍**：程式架構串接  
 - **謝仁恩**：遊戲框架規劃、小遊戲開發  
 - **王家瑋**：劇情設計、小遊戲開發  
 
+## 📎 計畫相關文件連結
+
+- [計畫申請書](https://docs.google.com/document/d/1_6MQnq9RFspNRnzhX3L7O7BVOcR9eKVW0-Fp4mqj_rM/edit?tab=t.0#heading=h.n4c6jtw6z21c)  
+- [遊戲劇本](https://docs.google.com/document/d/1iG6j2AXcqMMI52q6L6gI6fciwGlzXYE68-WPPe_ZhRs/edit?tab=t.i6ctw4x35a1h)  
+- [駐村同意書](https://docs.google.com/document/d/1aGVkWCSl9ZkFw6ViS-DpFKlDRnYAchQ4/edit)  
 
 ## 💡 總結
 
@@ -95,8 +85,4 @@
 在北斗紅磚市場的最後一天  
 你，是否能找到真正的出口？
 
-## 其他相關連結
-計畫申請書：https://docs.google.com/document/d/1_6MQnq9RFspNRnzhX3L7O7BVOcR9eKVW0-Fp4mqj_rM/edit?tab=t.0#heading=h.n4c6jtw6z21c
-劇本：https://docs.google.com/document/d/1iG6j2AXcqMMI52q6L6gI6fciwGlzXYE68-WPPe_ZhRs/edit?tab=t.i6ctw4x35a1h
-駐村同意書：https://docs.google.com/document/d/1aGVkWCSl9ZkFw6ViS-DpFKlDRnYAchQ4/edit
 
