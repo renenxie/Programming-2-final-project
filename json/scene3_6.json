@@ -1,0 +1,16 @@
+{
+    "background": [
+      {
+          "image": "tea.png"
+      }
+    ],
+    "characters": [
+      {
+        "name": "non_character.png",
+        "dialogues": [
+          "我低頭看著茶，茶面泛著光，一層又一層像要融進我眼裡。\n然後……畫面開始變了。不是眼花，而是空氣整個被抽空的那種變。"
+        ]
+      }
+    ]
+  }
+  

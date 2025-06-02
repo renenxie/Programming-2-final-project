@@ -1,0 +1,16 @@
+{
+    "background": [
+      {
+          "image": "Zhang5.png"
+      }
+    ],
+    "characters": [
+      {
+        "name": "non_character.png",
+        "dialogues": [
+          "（老張忽然拿出一盒舊棋子）\n「下盤棋？還是，你想去看看戲台……」"
+        ]
+      }
+    ]
+  }
+  

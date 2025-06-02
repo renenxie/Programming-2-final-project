@@ -1,0 +1,22 @@
+{
+    "background": [
+      {
+          "image": "black_shadow2.png",
+          "duration": 1000
+      },
+      {
+        "image": "Red_Brick_Market4.png"
+      }
+    ],
+    "characters": [
+      {
+        "name": "non_character.png",
+        "dialogues": [
+          "「那個身穿黑色風衣的身影……\n仍偶爾悄然出現，\n在無人注意的時刻……",
+          "凝視著某個，\n遺忘中的過去——",
+          "或是，\n凝視著……即將抵達的你。」"
+        ]
+      }
+    ]
+  }
+  

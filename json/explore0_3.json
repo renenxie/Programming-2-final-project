@@ -1,0 +1,16 @@
+{
+    "background": [
+    {
+        "image": "hand_newspaper.png"
+    }
+  ],
+  "characters": [
+    {
+      "name": "non_character.png",
+      "dialogues": [
+        "「……這個地方……我是不是來過？」\n",
+        "「啊!!!!」"
+      ]
+    }
+  ]
+}

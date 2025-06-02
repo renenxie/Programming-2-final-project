@@ -1,0 +1,17 @@
+{
+    "background": [
+      {
+          "image": "Zhang2.png"
+      }
+    ],
+    "characters": [
+      {
+        "name": "non_character.png",
+        "dialogues": [
+          "將一壺枸杞茶緩緩傾入杯中。\n茶色像老照片，茶煙輕輕繞著杯緣打轉。",
+          "（這氣味……我肯定聞過。）\n (不是最近，也不是某間茶行，而是在一場……戲開始之前。)\n"
+        ]
+      }
+    ]
+  }
+  

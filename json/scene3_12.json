@@ -1,0 +1,18 @@
+{
+    "background": [
+      {
+          "image": "memory6.png"
+      }
+    ],
+    "characters": [
+      {
+        "name": "non_character.png",
+        "dialogues": [
+          "我……我是不是來過？\n",
+          "不對……不是「來過」。\n",
+          "是我曾經……\n就是這裡的一部分。"
+        ]
+      }
+    ]
+  }
+  

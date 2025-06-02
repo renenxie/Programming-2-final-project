@@ -1,0 +1,16 @@
+{
+    "background": [
+      {
+          "image": "tree1.png"
+      }
+    ],
+    "characters": [
+      {
+        "name": "non_character.png",
+        "dialogues": [
+          "「陽光透過樹葉斑駁灑落，大榕樹盤根錯節、枝幹粗壯。\n石桌邊幾位長輩輕聲聊天，一旁茶壺冒著熱氣，\n棋盤上幾枚棋子未落定，遠處可見米店門口掛著「永豐」布招"
+        ]
+      }
+    ]
+  }
+  

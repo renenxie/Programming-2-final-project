@@ -1,0 +1,18 @@
+{
+  "background": [
+    {
+        "image": "black_view.png"
+    }
+  ],
+  "characters": [
+    {
+      "name": "non_character.png",
+      "dialogues": [
+        "「……這裡……是哪裡？」\n「為什麼……我的腦海，一片空白……」\n",
+        "「腳下，是冰冷破碎的地面……」\n「空氣中，有焦味，還有……」\n",
+        "「什麼東西，正在凝視著我？」"
+      ]
+    }
+  ]
+}
+  

@@ -1,0 +1,16 @@
+{
+    "background": [
+      {
+          "image": "Red_Brick_Market1.png"
+      }
+    ],
+    "characters": [
+      {
+        "name": "non_character.png",
+        "dialogues": [
+          "「……呼哈……呼」\n「哈……呼哈……呼…………」"
+        ]
+      }
+    ]
+  }
+  

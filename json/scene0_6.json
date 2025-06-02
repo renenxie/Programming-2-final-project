@@ -1,0 +1,17 @@
+{
+    "background": [
+      {
+          "image": "street_vendor.png"
+      }
+    ],
+    "characters": [
+      {
+        "name": "non_character.png",
+        "dialogues": [
+          "「隨著時光推移……\n這座市場，逐漸式微……\n被現代城市的高樓與鋼鐵森林，一點一滴吞噬。",
+          "但仍有攤位堅守著，\n販賣著傳統的小吃與手工藝品，\n在冷清的空氣中，靜靜綻放著過去的氣息。」"
+        ]
+      }
+    ]
+  }
+  

@@ -1,0 +1,17 @@
+{
+    "background": [
+      {
+          "image": "Red_Brick_Market3.png"
+      }
+    ],
+    "characters": [
+      {
+        "name": "non_character.png",
+        "dialogues": [
+          "「這座擁有百年歷史的市場，\n曾以古老的紅磚拱門……\n和木造屋架聞名。",
+          "居民與攤販們，\n每日在中央廣場熱絡往來，\n熙熙攘攘，生氣盎然。」"
+        ]
+      }
+    ]
+  }
+  

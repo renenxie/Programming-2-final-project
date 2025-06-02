@@ -1,0 +1,16 @@
+{
+    "background": [
+      {
+          "image": "tree2.png"
+      }
+    ],
+    "characters": [
+      {
+        "name": "non_character.png",
+        "dialogues": [
+          "老張（村長）（笑著轉頭看你，語氣親切）\n「少年仔，要來一杯枸杞茶？還是陪我對一局象棋？"
+        ]
+      }
+    ]
+  }
+  

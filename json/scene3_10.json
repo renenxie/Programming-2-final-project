@@ -1,0 +1,16 @@
+{
+    "background": [
+      {
+          "image": "memory4.png"
+      }
+    ],
+    "characters": [
+      {
+        "name": "non_character.png",
+        "dialogues": [
+          " 有個男人爬上棚子，\n燈籠才剛點亮，布還在飄，\n就有人在底下拍手催：「快了快了，戲就要開場囉！」\n"
+        ]
+      }
+    ]
+  }
+  
