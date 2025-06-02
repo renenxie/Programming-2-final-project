@@ -209,4 +209,49 @@ class Game():
 
 
         self.display_surface.blit(self.target_monster_image, self.target_monster_rect)
-        self.display_surface.blit(self.treasure, self.treasu
+        self.display_surface.blit(self.treasure, self.treasure_rect)
+
+    def check_collisions(self):
+        collided_monster = pygame.sprite.spritecollideany(self.player, self.monster_group)
+        if collided_monster:
+            self.player.die_sound.play()
+            self.player.lives -= 1
+            if self.player.lives <= 0:
+                self.result = False
+                self.running = False
+            self.player.reset()
+
+        if self.player.rect.colliderect(self.treasure_rect):
+            self.success_sound.play()
+            self.score += 500
+            self.treasure_collected += 1
+            self.increase_difficulty()
+            if self.treasure_collected >= 4:
+                self.result = True
+                self.running = False
+            else:
+                self.spawn_treasure()
+                self.player.reset()
+
+    def increase_difficulty(self):
+        for m_type in range(4):
+            self.monster_group.add(Monster(
+                random.randint(0, WINDOW_WIDTH - 64),
+                random.randint(MONSTER_ZONE_TOP, MONSTER_ZONE_BOTTOM - 64),
+                self.target_monster_images[m_type], m_type))
+
+    def start_new_round(self):
+        self.score += int(10000 * self.round_number / (1 + self.round_time))
+        self.round_time = 0
+        self.frame_count = 0
+        self.round_number += 1
+        self.player.warps += 1
+        self.monster_group.empty()
+        for i in range(self.round_number):
+            for m_type in range(4):
+                self.monster_group.add(Monster(
+                    random.randint(0, WINDOW_WIDTH - 64),
+                    random.randint(MONSTER_ZONE_TOP, MONSTER_ZONE_BOTTOM - 64),
+                    self.target_monster_images[m_type], m_type))
+        self.target_monster_image = self.treasure
+        self.next_level_sound.play()
