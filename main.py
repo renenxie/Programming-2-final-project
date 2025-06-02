@@ -20,5 +20,7 @@ def main():
     pygame.quit()
     print("所有遊戲結束")
 
+    ##更改確認
+
 if __name__ == "__main__":
     main()
