@@ -219,5 +219,8 @@ sys.exit()
 #     pygame.quit()
 #     print("所有遊戲結束")
 
-# if __name__ == "__main__":
-#     main()
+
+
+if __name__ == "__main__":
+    main()
+
