@@ -1,0 +1,16 @@
+{
+    "background": [
+      {
+          "image": "Red_Brick_Market2.png"
+      }
+    ],
+    "characters": [
+      {
+        "name": "non_character.png",
+        "dialogues": [
+          "「在紅磚市場重建完成之後，\n居民們開始低聲傳誦起一個奇怪的故事。」"
+        ]
+      }
+    ]
+  }
+  

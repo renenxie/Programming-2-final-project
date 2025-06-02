@@ -1,0 +1,18 @@
+{
+    "background": [
+      {
+          "image": "market_cornor.png"
+      }
+    ],
+    "characters": [
+      {
+        "name": "non_character.png",
+        "dialogues": [
+          "「市場的某些角落……\n似乎被時間遺忘。",
+          "燻黑的紅磚牆……\n烈焰撕裂出的裂紋……\n焦黑殘破的木樑……",
+          "默默訴說著，過去未竟的故事。"
+        ]
+      }
+    ]
+  }
+  
