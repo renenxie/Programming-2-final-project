@@ -23,6 +23,35 @@ class Scene2:
         self.task_completed = False
         self.game_started = False
         
+        # 中藥收集視窗相關變數
+        self.show_medicine_window = False
+        self.medicine_page = 0  # 當前頁面索引
+        self.medicine_info = [
+            {  # 第一關
+                'title': "第一關所需收集的中藥",
+                'medicines': [
+                    {'name': '烏梅', 'image': 'medicine1.png'},
+                    {'name': '陳皮', 'image': 'medicine2.png'},
+                    {'name': '甘草', 'image': 'medicine3.png'}
+                ]
+            },
+            {  # 第二關
+                'title': "第二關所需收集的中藥",
+                'medicines': [
+                    {'name': '山楂', 'image': 'medicine4.png'},
+                    {'name': '黑胡椒', 'image': 'medicine5.png'},
+                    {'name': '麥芽糖', 'image': 'medicine6.png'}
+                ]
+            },
+            {  # 第三關
+                'title': "第三關所需收集的中藥",
+                'medicines': [
+                    {'name': '八仙果', 'image': 'medicine7.png'},
+                    {'name': '仙草濃汁', 'image': 'medicine8.png'}
+                ]
+            }
+        ]
+        
         # 遮罩相關變數
         self.show_mask = True
         self.mask_shown = False
@@ -45,6 +74,7 @@ class Scene2:
         """載入所有資源並根據設定調整大小"""
         self.backgrounds = {}
         self.original_items = {}
+        self.medicine_images = {}  # 儲存中藥圖片
         
         # 載入front背景圖片 - 改為medicine_store.png
         path = os.path.join('images', 'medicine_store.png')
@@ -70,6 +100,17 @@ class Scene2:
                 original_img, 
                 (props['width'], props['height'])
             )
+        
+        # 載入中藥圖片
+        for page in self.medicine_info:
+            for medicine in page['medicines']:
+                path = os.path.join('catch_the_clown_assets', medicine['image'])
+                original_img = pygame.image.load(path)
+                # 調整圖片大小為150x150
+                self.medicine_images[medicine['image']] = pygame.transform.scale(
+                    original_img, 
+                    (150, 150)
+                )
     
     def setup_items(self):
         """設定物品初始位置"""
@@ -83,6 +124,109 @@ class Scene2:
                 {'id': 'item4', 'pos': (bg_x + 250, bg_y + 150), 'collected': False}
             ]
         }
+    
+    def draw_medicine_window(self):
+        """繪製中藥收集視窗（橫向擺放）"""
+        # 創建半透明背景
+        s = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SRCALPHA)
+        s.fill((0, 0, 0, 220))  # 比任務視窗更深的半透明黑色
+        self.screen.blit(s, (0, 0))
+        
+        # 視窗大小和位置
+        window_width = SCREEN_WIDTH * 0.9  # 加寬視窗以容納橫向排列
+        window_height = SCREEN_HEIGHT * 0.6
+        window_x = (SCREEN_WIDTH - window_width) // 2
+        window_y = (SCREEN_HEIGHT - window_height) // 2
+        
+        # 繪製視窗背景
+        window_rect = pygame.Rect(window_x, window_y, window_width, window_height)
+        pygame.draw.rect(self.screen, (40, 40, 40), window_rect, border_radius=10)
+        pygame.draw.rect(self.screen, (200, 200, 200), window_rect, 2, border_radius=10)
+        
+        # 繪製標題
+        title_font = pygame.font.Font("msjh.ttc", 30)
+        title_text = title_font.render(self.medicine_info[self.medicine_page]['title'], True, (255, 255, 255))
+        title_rect = title_text.get_rect(center=(SCREEN_WIDTH//2, window_y + 40))
+        self.screen.blit(title_text, title_rect)
+        
+        # 繪製當前頁面的中藥（橫向排列）
+        medicines = self.medicine_info[self.medicine_page]['medicines']
+        medicine_count = len(medicines)
+        
+        # 計算每個中藥的間距
+        total_width = medicine_count * 180  # 每個中藥佔180像素寬度
+        start_x = (SCREEN_WIDTH - total_width) // 2
+        
+        for i, medicine in enumerate(medicines):
+            # 繪製中藥圖片
+            img = self.medicine_images[medicine['image']]
+            img_x = start_x + i * 180
+            img_y = window_y + 100
+            
+            self.screen.blit(img, (img_x, img_y))
+            
+            # 繪製中藥名稱
+            content_font = pygame.font.Font("msjh.ttc", 24)
+            name_text = content_font.render(medicine['name'], True, (255, 255, 255))
+            name_rect = name_text.get_rect(center=(img_x + 75, img_y + 170))  # 圖片下方
+            self.screen.blit(name_text, name_rect)
+        
+        # 繪製頁面控制按鈕
+        button_width = 100
+        button_height = 40
+        
+        # 上一頁按鈕 (如果不是第一頁才顯示)
+        if self.medicine_page > 0:
+            prev_btn = pygame.Rect(
+                window_x + 20,
+                window_y + window_height - 60,
+                button_width,
+                button_height
+            )
+            pygame.draw.rect(self.screen, (70, 70, 70), prev_btn, border_radius=5)
+            pygame.draw.rect(self.screen, (200, 200, 200), prev_btn, 2, border_radius=5)
+            
+            button_font = pygame.font.Font("msjh.ttc", 20)
+            button_text = button_font.render("上一頁", True, (255, 255, 255))
+            button_text_rect = button_text.get_rect(center=prev_btn.center)
+            self.screen.blit(button_text, button_text_rect)
+        else:
+            prev_btn = None
+        
+        # 下一頁按鈕 (如果不是最後一頁才顯示)
+        if self.medicine_page < len(self.medicine_info) - 1:
+            next_btn = pygame.Rect(
+                window_x + window_width - button_width - 20,
+                window_y + window_height - 60,
+                button_width,
+                button_height
+            )
+            pygame.draw.rect(self.screen, (70, 70, 70), next_btn, border_radius=5)
+            pygame.draw.rect(self.screen, (200, 200, 200), next_btn, 2, border_radius=5)
+            
+            button_font = pygame.font.Font("msjh.ttc", 20)
+            button_text = button_font.render("下一頁", True, (255, 255, 255))
+            button_text_rect = button_text.get_rect(center=next_btn.center)
+            self.screen.blit(button_text, button_text_rect)
+        else:
+            next_btn = None
+        
+        # 關閉按鈕
+        close_btn = pygame.Rect(
+            SCREEN_WIDTH // 2 - button_width // 2,
+            window_y + window_height - 60,
+            button_width,
+            button_height
+        )
+        pygame.draw.rect(self.screen, (200, 50, 50), close_btn, border_radius=5)
+        pygame.draw.rect(self.screen, (200, 200, 200), close_btn, 2, border_radius=5)
+        
+        button_font = pygame.font.Font("msjh.ttc", 20)
+        button_text = button_font.render("關閉", True, (255, 255, 255))
+        button_text_rect = button_text.get_rect(center=close_btn.center)
+        self.screen.blit(button_text, button_text_rect)
+        
+        return prev_btn, next_btn, close_btn
     
     def draw_task_window(self):
         """繪製任務視窗"""
@@ -128,22 +272,37 @@ class Scene2:
             self.screen.blit(text_surface, (window_x + 30, y_offset))
             y_offset += 35
         
+        # 繪製所需收集的中藥按鈕
+        medicine_btn = pygame.Rect(
+            window_x + window_width // 2 - 150,
+            window_y + window_height - 140,
+            300,
+            50
+        )
+        pygame.draw.rect(self.screen, (70, 70, 70), medicine_btn, border_radius=5)
+        pygame.draw.rect(self.screen, (200, 200, 200), medicine_btn, 2, border_radius=5)
+        
+        button_font = pygame.font.Font("msjh.ttc", 24)
+        button_text = button_font.render("所需收集的中藥", True, (255, 255, 255))
+        button_text_rect = button_text.get_rect(center=medicine_btn.center)
+        self.screen.blit(button_text, button_text_rect)
+        
         # 繪製開始遊戲按鈕
-        button_rect = pygame.Rect(
+        start_btn = pygame.Rect(
             SCREEN_WIDTH//2 - 100,
             window_y + window_height - 80,
             200,
             50
         )
-        pygame.draw.rect(self.screen, (70, 70, 70), button_rect, border_radius=5)
-        pygame.draw.rect(self.screen, (200, 200, 200), button_rect, 2, border_radius=5)
+        pygame.draw.rect(self.screen, (70, 70, 70), start_btn, border_radius=5)
+        pygame.draw.rect(self.screen, (200, 200, 200), start_btn, 2, border_radius=5)
         
         button_font = pygame.font.Font("msjh.ttc", 24)
         button_text = button_font.render("進入遊戲", True, (255, 255, 255))
-        button_text_rect = button_text.get_rect(center=button_rect.center)
+        button_text_rect = button_text.get_rect(center=start_btn.center)
         self.screen.blit(button_text, button_text_rect)
         
-        return button_rect
+        return medicine_btn, start_btn
     
     def handle_events(self):
         # 處理遮罩計時
@@ -170,15 +329,31 @@ class Scene2:
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
                 
+                # 檢查中藥收集視窗中的按鈕點擊
+                if self.show_medicine_window:
+                    prev_btn, next_btn, close_btn = self.draw_medicine_window()
+                    
+                    if close_btn and close_btn.collidepoint(mouse_pos):
+                        self.show_medicine_window = False
+                    
+                    if prev_btn and prev_btn.collidepoint(mouse_pos) and self.medicine_page > 0:
+                        self.medicine_page -= 1
+                    
+                    if next_btn and next_btn.collidepoint(mouse_pos) and self.medicine_page < len(self.medicine_info) - 1:
+                        self.medicine_page += 1
+                
                 # 檢查任務視窗中的按鈕點擊
-                if self.show_task_window:
-                    button_rect = self.draw_task_window()
-                    if button_rect.collidepoint(mouse_pos):
+                elif self.show_task_window:
+                    medicine_btn, start_btn = self.draw_task_window()
+                    
+                    if medicine_btn.collidepoint(mouse_pos):
+                        self.show_medicine_window = True
+                    
+                    if start_btn.collidepoint(mouse_pos):
                         self.show_task_window = False
                         from catch_the_clown_class import CatchTheClownGame
                         CatchTheClownGame().run()
                         self.game_started = True
-                    continue
                 
                 # 檢查返回按鈕
                 if self.back_btn.collidepoint(mouse_pos):
@@ -187,7 +362,7 @@ class Scene2:
                     return False
                 
                 # 檢查物品點擊 (只有遊戲開始後才能點擊)
-                if self.game_started:
+                if self.game_started and not self.show_medicine_window:
                     if self.inventory.selected_index == -1:
                         for item in self.item_positions[self.current_view]:
                             if not item['collected']:
@@ -271,8 +446,11 @@ class Scene2:
             text_rect = text.get_rect(center=(SCREEN_WIDTH//2, SCREEN_HEIGHT//2))
             self.screen.blit(text, text_rect)
         
-        # 繪製任務視窗
-        if self.show_task_window:
+        # 繪製中藥收集視窗 (最上層)
+        if self.show_medicine_window:
+            self.draw_medicine_window()
+        # 繪製任務視窗 (中層)
+        elif self.show_task_window:
             self.draw_task_window()
         else:
             # 只有遊戲開始後才繪製物品和物品欄
@@ -296,7 +474,7 @@ class Scene2:
     def draw_ui(self):
         """繪製UI按鈕和提示"""
         # 返回按鈕 (只有遊戲開始後才顯示)
-        if self.game_started:
+        if self.game_started and not self.show_task_window and not self.show_medicine_window:
             self.back_btn = pygame.Rect(30, 30, 80, 40)
             pygame.draw.rect(self.screen, (200, 50, 50), self.back_btn)
             font = pygame.font.Font("msjh.ttc", 20)

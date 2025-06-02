@@ -55,7 +55,33 @@ def check_scene_trigger(mouse_pos):
     )
     return center_rect.collidepoint(mouse_pos)
 
-test = True
+def draw_dialogue_box(screen, text, font, shopkeeper_rect):
+    """繪製對話框"""
+    # 對話框位置在店主上方
+    box_width = 400
+    box_height = 100
+    box_x = shopkeeper_rect.centerx - box_width // 2
+    box_y = shopkeeper_rect.top - box_height - 20
+    
+    # 繪製對話框背景
+    pygame.draw.rect(screen, (255, 255, 255), (box_x, box_y, box_width, box_height))
+    pygame.draw.rect(screen, (0, 0, 0), (box_x, box_y, box_width, box_height), 2)
+    
+    # 繪製對話框三角形指示
+    pygame.draw.polygon(screen, (255, 255, 255), 
+                       [(shopkeeper_rect.centerx, shopkeeper_rect.top - 10),
+                        (shopkeeper_rect.centerx - 15, shopkeeper_rect.top - 30),
+                        (shopkeeper_rect.centerx + 15, shopkeeper_rect.top - 30)])
+    
+    # 渲染文字（自動換行）
+    words = text.split('\n')
+    y_offset = 0
+    for line in words:
+        text_surface = font.render(line, True, (0, 0, 0))
+        screen.blit(text_surface, (box_x + 20, box_y + 20 + y_offset))
+        y_offset += 30
+
+test = False
 
 # 主循環
 clock = pygame.time.Clock()
@@ -64,6 +90,7 @@ scene0_completed = False | test  # 新增標記變量
 explore0_completed = False | test
 scene2_completed = False | test
 scene3_completed = False  # 初始為未完成
+task_completed = False | test # 任務是否完成
 
 zoom_animator = ZoomAnimation()  # 這行很重要，要在主循環外初始化
 arrows_unlocked = False  # 箭頭是否解鎖
@@ -79,6 +106,10 @@ if not scene0_completed:
 if scene0_completed and not explore0_completed:
     explore0 = Explore0(screen, inventory)
     explore0_completed = explore0.run()
+    
+if explore0_completed and not task_completed:
+    from feed_the_dragon_class import FeedTheDragonGame
+    task_completed = FeedTheDragonGame().run()
 
 while running:
     for event in pygame.event.get():
@@ -115,13 +146,9 @@ while running:
                 )
                 current_view = new_view
 
-            # elif check_scene_trigger(mouse_pos) and current_view == 'front':
-            #     scene1 = Scene1(screen, inventory)
-            #     scene1.run()
-
-            elif check_scene_trigger(mouse_pos) and current_view == 'right':
-                scene2 = Scene2(screen, inventory)
-                scene2_completed = scene2.run()   
+            elif check_scene_trigger(mouse_pos) and current_view == 'right' and not scene2_completed:
+                if not zoom_animator.active:
+                    zoom_animator.start(images['right']['image'])   
 
             elif check_scene_trigger(mouse_pos) and current_view == 'back' and scene2_completed:
                 if not zoom_animator.active:
@@ -142,13 +169,56 @@ while running:
             scene3 = Scene3(screen, inventory)
             scene3_completed = scene3.run()
             zoom_animator.reset()
+    elif zoom_animator.active and current_view == 'right':
+        animation_completed = zoom_animator.update(screen, images['right']['position'])
+        if animation_completed and zoom_animator.should_trigger_scene:
+            scene2 = Scene2(screen, inventory)
+            scene2_completed = scene2.run()
+            zoom_animator.reset()
     else:
         current_image_data = images[current_view]
         screen.blit(current_image_data['image'], current_image_data['position'])
         
-        # 在front視角顯示店主圖片
+        # 在front視角顯示店主圖片和對話框
         if current_view == 'front':
             screen.blit(shopkeeper_img, shopkeeper_rect)
+            
+            # 根據遊戲進度顯示不同的對話內容
+            if not arrows_unlocked:
+                dialogue_text = "嗨小夥子!有什麼可以幫忙的嗎?"
+            elif arrows_unlocked and not scene2_completed:
+                dialogue_text = "這邊周圍有春安中西藥局和大榕樹\n要不要先去藥局逛逛?"
+            else:
+                dialogue_text = "可以去大榕樹下找老張聊天喔~"
+            
+            draw_dialogue_box(screen, dialogue_text, font, shopkeeper_rect)
+
+        if current_view == 'right' and scene2_completed:
+            back_lock_font = pygame.font.Font("標楷體.ttf", 36)  # 專門用於back視角解鎖提示的字型
+
+            # 創建更大的半透明表面 (600x300)
+            overlay_width, overlay_height = 600, 300
+            overlay = pygame.Surface((overlay_width, overlay_height), pygame.SRCALPHA)
+            overlay.fill((0, 0, 0, 180))  # 半透明黑色背景
+            
+            # 添加邊框效果
+            border_size = 5
+            pygame.draw.rect(overlay, (100, 100, 100, 200), 
+                        (0, 0, overlay_width, overlay_height), border_size)
+            
+            # 繪製到屏幕上（居中）
+            screen.blit(overlay, (SCREEN_WIDTH//2 - overlay_width//2, 
+                                SCREEN_HEIGHT//2 - overlay_height//2))
+            
+            # 繪製更大的文字
+            text = back_lock_font.render("此區域已鎖定", True, (255, 255, 255))
+            text_rect = text.get_rect(center=(SCREEN_WIDTH//2, SCREEN_HEIGHT//2))
+            
+            # 為文字添加陰影效果
+            shadow = back_lock_font.render("此區域已鎖定", True, (0, 0, 0, 150))
+            screen.blit(shadow, (text_rect.x + 3, text_rect.y + 3))
+            
+            screen.blit(text, text_rect)
 
         # 在back視角顯示解鎖提示（如果未解鎖）
         if current_view == 'back' and not scene2_completed:
@@ -197,30 +267,3 @@ while running:
 
 pygame.quit()
 sys.exit()
-# import pygame
-# from monster_wrangler_class import MonsterWranglerGame
-# from catch_the_clown_class import CatchTheClownGame
-# from feed_the_dragon_class import FeedTheDragonGame
-
-# def main():
-#     pygame.init()
-#     pygame.mixer.init()
-   
-
-#     # print("▶ 執行 Monster Wrangler")
-#     # MonsterWranglerGame().run()
-
-#     # print("▶ 執行 Catch the Clown")
-#     # CatchTheClownGame().run()
-
-#     print("▶ 執行 Feed the Dragon")
-#     FeedTheDragonGame().run()
-
-#     pygame.quit()
-#     print("所有遊戲結束")
-
-
-
-if __name__ == "__main__":
-    main()
-

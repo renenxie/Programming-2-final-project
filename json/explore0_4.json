@@ -1,0 +1,16 @@
+{
+    "background": [
+    {
+        "image": "mouse.png"
+    }
+  ],
+  "characters": [
+    {
+      "name": "non_character.png",
+      "dialogues": [
+        "「……奇怪……我又是到了哪裡？」\n怎麼會有這麼多老鼠？",
+        "「得趕緊解決掉他們，離開這個鬼地方!!!」"
+      ]
+    }
+  ]
+}

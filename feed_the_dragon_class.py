@@ -156,4 +156,4 @@ class FeedTheDragonGame:
                 self.wait_for_key()
                 self.reset_game()
 
-        pygame.quit()
+        return True

@@ -7,14 +7,14 @@
     },
     "screen": {
         "width": 1200,
-        "height": 700
+        "height": 675
     },
     "dialogue_box": {
         "width": 700,
         "height": 150
     },
     "buttons": {
-        "width": 50,
-        "height": 50
+        "width": 70,
+        "height": 70
     }
 }

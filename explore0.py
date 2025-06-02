@@ -346,6 +346,7 @@ class Explore0:
         # 獲取當前視角對應的所有場景資源
         scenes = [
             {"scene": "explore0_3.json"},
+            {"scene": "explore0_4.json"},
         ]
         
         # 創建場景序列
