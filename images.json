@@ -1,0 +1,20 @@
+{
+    "images": {
+        "front": "front.png",
+        "back": "back.png",
+        "left": "left.png",
+        "right": "right.png"
+    },
+    "screen": {
+        "width": 1200,
+        "height": 700
+    },
+    "dialogue_box": {
+        "width": 700,
+        "height": 150
+    },
+    "buttons": {
+        "width": 50,
+        "height": 50
+    }
+}

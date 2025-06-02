@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/eric/Desktop/python＿learning/Pygame/2. catch_the_clown_assets",
+      "program": "/Users/eric/Desktop/python＿learning/Pygame/2. catch_the_clown_assets/build/Debug/outDebug"
+    }
+  ]
+}
