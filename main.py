@@ -25,7 +25,7 @@ left_btn, right_btn = create_buttons()
 current_view = 'front'
 
 # 載入店主圖片
-shopkeeper_img = pygame.image.load("images/shopkeeper.png").convert_alpha()
+shopkeeper_img = pygame.image.load("images/non_character.png").convert_alpha()
 # 調整大小並居中
 shopkeeper_img = pygame.transform.scale(shopkeeper_img, (400, 400))
 shopkeeper_rect = shopkeeper_img.get_rect(center=(SCREEN_WIDTH//2, SCREEN_HEIGHT//2))
