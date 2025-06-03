@@ -45,6 +45,7 @@ nginx
 Copy
 Edit
 python main_game_sequential.py
+
 ④ 👩‍💻 成員貢獻（Who Did What）
 此遊戲由五位組員協力開發，每位皆獨立提交程式／素材，確保貢獻具體可見：
 
